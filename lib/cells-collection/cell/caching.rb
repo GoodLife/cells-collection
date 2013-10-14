@@ -38,8 +38,6 @@ module Cell
         rendered = ''
 
         collection.each do |item|
-          args_for_single[1] = item # Prepare args for single item
-
           # Get key of item, and check if cached has that key
           if cached_result = cached[item_to_key[item.object_id]]
             rendered << cached_result
@@ -47,6 +45,7 @@ module Cell
             cell = item_to_cell[item.object_id]
             yield cell if block_given?
 
+            args_for_single[1] = item # Prepare args for single item
             rendered << render_cell_state(cell, state, *args_for_single)
           end
         end
