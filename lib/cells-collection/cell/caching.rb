@@ -10,19 +10,21 @@ module Cell
         return '' if collection.empty?
 
         item_to_key = {}
+        item_to_key.compare_by_identity
         item_to_cell = {} # Cache initialized cell object
+        item_to_cell.compare_by_identity
 
         # Create item-key mapping table for cacheable cells
         collection.each do |item|
           args_for_single[1] = item # Prepare args for single item
           cell = create_cell_for(name, *args_for_single)
 
-          item_to_cell[item.object_id] = cell
+          item_to_cell[item] = cell
 
           if cell.cache?(state, *args)
             # Remove first arg, because compute_key does not want the cell object as first argument.
             # I don't know where is this stripped in single cell rendering code.
-            item_to_key[item.object_id] = cell.compute_key(state, *(args_for_single[1..-1]))
+            item_to_key[item] = cell.compute_key(state, *(args_for_single[1..-1]))
           end
         end
 
@@ -39,10 +41,10 @@ module Cell
 
         collection.each do |item|
           # Get key of item, and check if cached has that key
-          if cached_result = cached[item_to_key[item.object_id]]
+          if cached_result = cached[item_to_key[item]]
             rendered << cached_result
           else
-            cell = item_to_cell[item.object_id]
+            cell = item_to_cell[item]
             yield cell if block_given?
 
             args_for_single[1] = item # Prepare args for single item
