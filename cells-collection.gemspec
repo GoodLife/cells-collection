@@ -6,7 +6,7 @@ require 'cells-collection/version'
 Gem::Specification.new do |spec|
   spec.name          = "cells-collection"
   spec.version       = Cells::Collection::VERSION
-  spec.authors       = ["lulalala"]
+  spec.authors       = ["GoodLife", "lulalala"]
   spec.email         = ["mark@goodlife.tw"]
   spec.description   = %q{Cells rendering for a collection of items, utilizing cache bulk-read.}
   spec.summary       = %q{Cells rendering for a collection of items}
