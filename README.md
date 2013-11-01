@@ -24,9 +24,25 @@ To setup Rails to use Memcached store, take look at the [dalli gem](https://gith
 
 ## Usage
 
-Do this in the view:
+Doing this in the view:
 
     <%= render_cell_collection :cart, :item, @items %>
+
+will be equivalent to the old:
+
+    <% @items.each do |item| %>
+      <%= render_cell :cart, :item, item %>
+    <% end %>
+
+If the cell requires more arguments, they can be passed at the end. They will be passed to each cell rendering too:
+
+    <%= render_cell_collection :cart, :item, @items, 'hot', 10 %>
+
+is equivalent to:
+
+    <% @items.each do |item| %>
+      <%= render_cell :cart, :item, item, 'hot', 10 %>
+    <% end %>
 
 ## Contributing
 
