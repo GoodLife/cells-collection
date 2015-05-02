@@ -17,7 +17,7 @@ module Cell
         # Create item-key mapping table for cacheable cells
         collection.each do |item|
           args_for_single[1] = item # Prepare args for single item
-          cell = create_cell_for(name, *args_for_single)
+          cell = cell_for(name, *args_for_single)
 
           item_to_cell[item] = cell
 

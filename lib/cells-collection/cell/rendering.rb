@@ -11,7 +11,7 @@ module Cell
         collection.each do |item|
           args_for_single[1] = item
 
-          cell = create_cell_for(name, *args_for_single)
+          cell = cell_for(name, *args_for_single)
           yield cell if block_given?
 
           rendered << render_cell_state(cell, state, *args_for_single)
